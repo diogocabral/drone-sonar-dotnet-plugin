@@ -10,7 +10,9 @@ else
     PROJECT_KEY="${DRONE_REPO/\//:}"
 fi
 
-dotnet sonarscanner begin /k:"${PROJECT_KEY}" /d:sonar.host.url="${PLUGIN_SONAR_HOST}"  /d:sonar.login="${PLUGIN_SONAR_TOKEN}"
+EPOCH_TIMESTAMP=`date +"%s"`
+
+dotnet sonarscanner begin /k:"${PROJECT_KEY}" /d:sonar.host.url="${PLUGIN_SONAR_HOST}"  /d:sonar.login="${PLUGIN_SONAR_TOKEN}" /v:"${EPOCH_TIMESTAMP}"
 
 dotnet build
 
