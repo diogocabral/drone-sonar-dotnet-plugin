@@ -1,6 +1,6 @@
-FROM mcr.microsoft.com/dotnet/sdk:5.0
+FROM mcr.microsoft.com/dotnet/sdk:8.0
 
-RUN dotnet tool install --global dotnet-sonarscanner --version 5.7.1
+RUN dotnet tool install --global dotnet-sonarscanner --version 6.2.0
 
 ENV PATH="/root/.dotnet/tools:${PATH}"
 
@@ -9,7 +9,7 @@ ARG SONAR_SCANNER_CLI=sonar-scanner-cli-${SONAR_VERSION}
 ARG SONAR_SCANNER=sonar-scanner-${SONAR_VERSION}
 
 RUN apt-get update \
-    && apt-get install -y unzip openjdk-11-jre \
+    && apt-get install -y unzip default-jre \
     && apt-get clean
 
 WORKDIR /bin
@@ -23,4 +23,4 @@ ENV PATH $PATH:/bin/${SONAR_SCANNER}/bin
 COPY drone-sonar.sh .
 RUN chmod +x drone-sonar.sh
 
-ENTRYPOINT /bin/drone-sonar.sh
+CMD /bin/drone-sonar.sh

@@ -1,5 +1,4 @@
 #!/bin/bash
-set -e
 
 cd `find /drone/src -name *.sln -print -quit | xargs dirname`
 
